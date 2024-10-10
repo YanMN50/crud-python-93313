@@ -67,11 +67,10 @@ session.add(usuario)
 session.commit()
 
 # Listando todos os usuários do banco de dados.
+# Read
 print("\nExibindo todods os usuarios do banco de dados.")
 lista_usuarios = session.query(Usuario).all()
 
-
-# Read
 for usuario in lista_usuarios:
     print(f"{usuario.id} - {usuario.nome} - {usuario.email} - {usuario.senha}")
 
@@ -86,15 +85,29 @@ session.commit()
 print("Usuário excluido com sucesso.")
 
 # Listando todos os usuários do banco de dados.
+# Read
 print("\nExibindo todods os usuarios do banco de dados.")
 lista_usuarios = session.query(Usuario).all()
 
 
-# Read
 for usuario in lista_usuarios:
     print(f"{usuario.id} - {usuario.nome} - {usuario.email} - {usuario.senha}")
 
  
+
+# Update
+print("\nAtualizando dados dos usuário.")
+usuario = session.query(Usuario).filter_by(email = email_usuario).first()
+
+novos_dados = Usuario(
+    nome = input("Digite seu nome: "),
+    email = input("Digite seu e-mail: "),
+    senha = input("Digite sua senha: ")
+)
+
+usuario = novos_dados
+session.add(usuario)
+session.commit()
 
 # Fechando conexão. 
 session.close()
